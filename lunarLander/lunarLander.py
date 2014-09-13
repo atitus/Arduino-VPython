@@ -36,8 +36,8 @@ scene.height=700
 scene.range=20
 
 ground = box(pos=vector(0,-10.05,0), size=(40.0,1,1), color=color.white)
-spaceship = box(pos=vector(0,8,0), size=(2,5,2), color=color.yellow)
-target=box(pos=vector(0,-10.05,0), size=(5.0,1,1), color=color.red)
+spaceship = box(pos=vector(-10,8,0), size=(2,5,2), color=color.yellow)
+target=box(pos=vector(10,-10.05,0), size=(5.0,1,1), color=color.red)
 
 spaceship.m = 1
 spaceship.v = vector(0,0,0)

@@ -23,8 +23,8 @@ void loop() {
     		}
     	}
   
-      int LRval = analogRead(A0);
-      int UDval = analogRead(A1);
+      int LRval = analogRead(LR);
+      int UDval = analogRead(UD);
       Serial.print(LRval, DEC);
       Serial.print('\t');
       Serial.print(UDval, DEC);
