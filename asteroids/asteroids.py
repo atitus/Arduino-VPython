@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import division, print_function
 from visual import *
 import serial, sys, time, random
 
@@ -10,8 +10,9 @@ def getData():
     data = line.split()
     LR = int(data[0])
     UD = int(data[1])
+    BUTTON = int(data[2])
     #print(str(LR)+"\t"+str(UD))
-    return [LR,UD]
+    return [LR,UD,BUTTON]
 
 #converts an angle in degrees to an angle in radians
 def rad(degrees): 
@@ -182,17 +183,26 @@ while spaceship.visible==1:
     voltage=getData()
     F.x=scale*(voltage[0]-1023/2)/512
     F.y=scale*(voltage[1]-1023/2)/512
+    fireBullet=voltage[2]
+    if(fireBullet):
+#        print(voltage)
+		bullet=sphere(pos=spaceship.pos+spaceship.axis, radius=0.1, color=color.yellow)
+		bullet.v=bulletspeed*norm(spaceship.axis)+spaceship.v
+		bulletsList.append(bullet)
+
+
     if(mag(F)>Fmin):
         spaceship.axis=norm(F)
 
-    if scene.kb.keys:
-        k = scene.kb.getkey()
-        if k==" ": #fire a bullet
-            bullet=sphere(pos=spaceship.pos+spaceship.axis, radius=0.1, color=color.yellow)
-            bullet.v=bulletspeed*norm(spaceship.axis)+spaceship.v
-            bulletsList.append(bullet)
-        elif k=="q": #pause the game
-            pause()
+# 	if scene.kb.keys:
+# 		k = scene.kb.getkey()
+# 		if k==" ": #fire a bullet
+# 			bullet=sphere(pos=spaceship.pos+spaceship.axis, radius=0.1, color=color.yellow)
+# 			bullet.v=bulletspeed*norm(spaceship.axis)+spaceship.v
+# 			bulletsList.append(bullet)
+# 		elif k=="q": #pause the game
+# 			pause()
+
 
     spaceship.v=spaceship.v+F/spaceship.m*dt
     spaceship.pos=spaceship.pos+spaceship.v*dt
